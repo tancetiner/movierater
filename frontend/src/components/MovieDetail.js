@@ -1,6 +1,6 @@
 import React from "react";
 
-const MovieDetail = ({ movie }) => (
+const MovieDetail = ({ movie, isRated }) => (
   <div>
     <table>
       <tbody>
@@ -32,9 +32,16 @@ const MovieDetail = ({ movie }) => (
         </tr>
 
         <tr>
-          <td> Rating: </td>
+          <td> IMDB Rating: </td>
           <td> {JSON.stringify(movie.imdbRating)} </td>
         </tr>
+
+        {isRated && (
+          <tr>
+            <td> Your Rating: </td>
+            <td> {JSON.stringify(movie.userRating)} </td>
+          </tr>
+        )}
       </tbody>
     </table>
   </div>

@@ -1,5 +1,6 @@
 from os import stat
 from django.shortcuts import render
+from itsdangerous import Serializer
 from numpy import var
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -106,7 +107,7 @@ def save(request):
             Movie.objects.create(
                 name=assignJSONValue(movieData["name"], "str"),
                 director=assignJSONValue(movieData["director"], "str"),
-                rating=assignJSONValue(movieData["imdbRating"], "num"),
+                imdbRating=assignJSONValue(movieData["imdbRating"], "num"),
                 releaseYear=assignJSONValue(movieData["releaseYear"], "num"),
                 metaScore=assignJSONValue(movieData["metaScore"], "num"),
                 overview=assignJSONValue(movieData["overview"], "str"),
@@ -136,7 +137,7 @@ def rate(request):
             Movie.objects.create(
                 name=assignJSONValue(movieData["name"], "str"),
                 director=assignJSONValue(movieData["director"], "str"),
-                rating=assignJSONValue(movieData["imdbRating"], "num"),
+                imdbRating=assignJSONValue(movieData["imdbRating"], "num"),
                 releaseYear=assignJSONValue(movieData["releaseYear"], "num"),
                 metaScore=assignJSONValue(movieData["metaScore"], "num"),
                 overview=assignJSONValue(movieData["overview"], "str"),
@@ -167,6 +168,31 @@ def watchlist(request):
     movieDataList = [
         MovieSerializer(Movie.objects.get(pk=id)).data for id in movieIdList
     ]
+    print(movieDataList)
+
+    return Response(movieDataList, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+def ratingList(request):
+    data = request.data
+    username = data["username"]
+
+    rate_query = Rate.objects.filter(username=username)
+
+    if len(rate_query) == 0:
+        return Response("No rated movie found", status=status.HTTP_204_NO_CONTENT)
+
+    movieIdList = [rate.movieId for rate in rate_query]
+
+    movieDataList = []
+    for id in movieIdList:
+        movie = Movie.objects.get(pk=id)
+        movieData = MovieSerializer(movie).data
+        movieData["userRating"] = Rate.objects.get(movieId=id).rating
+
+        movieDataList.append(movieData)
+
     print(movieDataList)
 
     return Response(movieDataList, status=status.HTTP_200_OK)

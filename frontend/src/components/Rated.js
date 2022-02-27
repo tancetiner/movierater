@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { showSavedRequest } from "../services/requests";
-import MovieDetail from "./MovieDetail";
+import React from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { showRatedRequest } from "../services/requests";
+import MovieDetail from "./MovieDetail";
 
-const Saved = (props) => {
+const Rated = () => {
   const [username] = useState(localStorage.getItem("username"));
-  const [saveList, setSaveList] = useState([]);
-  const [successfulRequest, setSuccess] = useState(false);
+  const [rateList, setRateList] = useState([]);
 
   let navigate = useNavigate();
 
   useEffect(() => {
-    const request = showSavedRequest(username);
+    const request = showRatedRequest(username);
     request
       .then((response) => {
-        setSuccess(true);
         console.log(response.data);
         const list = [].concat(response.data);
-        console.log(response.data);
-        console.log(typeof response.data);
-        setSaveList(list);
-        console.log(saveList);
+        setRateList(list);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -32,9 +28,9 @@ const Saved = (props) => {
   return (
     <div>
       <button onClick={handleBack}> Back </button>
-      {saveList.map((movie, idx) => (
+      {rateList.map((movie, idx) => (
         <div key={idx}>
-          <MovieDetail movie={movie} key={idx}>
+          <MovieDetail movie={movie} key={idx} isRated={true}>
             {" "}
           </MovieDetail>
           <br />
@@ -44,4 +40,4 @@ const Saved = (props) => {
   );
 };
 
-export default Saved;
+export default Rated;

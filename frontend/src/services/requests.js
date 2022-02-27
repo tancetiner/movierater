@@ -56,6 +56,13 @@ const showSavedRequest = (username) => {
   return request;
 };
 
+const showRatedRequest = (username) => {
+  console.log("in the rated movies request");
+  const body = { username: username };
+  const request = axios.post("http://127.0.0.1:8000/api/rated", body);
+  return request;
+};
+
 export {
   loginRequest,
   registerRequest,
@@ -63,4 +70,5 @@ export {
   randomMovieRequest,
   rateRequest,
   showSavedRequest,
+  showRatedRequest,
 };

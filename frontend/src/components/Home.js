@@ -88,6 +88,7 @@ const Home = () => {
       <br />
 
       <button onClick={() => navigate("/saved")}> Show Watchlist </button>
+      <button onClick={() => navigate("/rated")}> Show My Ratings </button>
     </div>
   );
 };

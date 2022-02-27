@@ -9,5 +9,6 @@ urlpatterns = [
     path("/movie", views.movies, name="movies"),
     path("/save", views.save, name="saves"),
     path("/rate", views.rate, name="ratings"),
-    path("/saved", views.watchlist, name="watchlist"),
+    path("/saved", views.watchlist, name="watch-list"),
+    path("/rated", views.ratingList, name="rating-list"),
 ]
