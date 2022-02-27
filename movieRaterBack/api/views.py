@@ -109,7 +109,7 @@ def save(request):
                 year=assignJSONValue(movieData["releaseYear"], "num"),
                 metaScore=assignJSONValue(movieData["metaScore"], "num"),
                 overview=assignJSONValue(movieData["overview"], "str"),
-                runtime=assignJSONValue(getRuntime(movieData["runtime"], "num")),
+                runtime=assignJSONValue(getRuntime(movieData["runtime"]), "num"),
                 genre=assignJSONValue(movieData["genre"], "str"),
             )
 

@@ -82,6 +82,7 @@ const Home = () => {
           ? localStorage.getItem("userRates")
           : ""}{" "}
       </p>
+      <p> {userRates} </p>
     </div>
   );
 };

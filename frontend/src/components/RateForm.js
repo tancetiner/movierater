@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { rateRequest } from "../services/requests";
+import { useNavigate } from "react-router-dom";
 
 const RateForm = (props) => {
   const [rating, setRating] = useState("1");
+
+  let navigate = useNavigate();
 
   const handleRate = (event) => {
     event.preventDefault();
@@ -16,6 +19,7 @@ const RateForm = (props) => {
       request
         .then((response) => {
           console.log(response.data);
+          navigate("/home");
         })
         .catch((err) => console.log(err));
     }
