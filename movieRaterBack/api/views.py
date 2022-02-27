@@ -1,3 +1,4 @@
+from os import stat
 from django.shortcuts import render
 from numpy import var
 from rest_framework.response import Response
@@ -106,7 +107,7 @@ def save(request):
                 name=assignJSONValue(movieData["name"], "str"),
                 director=assignJSONValue(movieData["director"], "str"),
                 rating=assignJSONValue(movieData["imdbRating"], "num"),
-                year=assignJSONValue(movieData["releaseYear"], "num"),
+                releaseYear=assignJSONValue(movieData["releaseYear"], "num"),
                 metaScore=assignJSONValue(movieData["metaScore"], "num"),
                 overview=assignJSONValue(movieData["overview"], "str"),
                 runtime=assignJSONValue(getRuntime(movieData["runtime"]), "num"),
@@ -136,7 +137,7 @@ def rate(request):
                 name=assignJSONValue(movieData["name"], "str"),
                 director=assignJSONValue(movieData["director"], "str"),
                 rating=assignJSONValue(movieData["imdbRating"], "num"),
-                year=assignJSONValue(movieData["releaseYear"], "num"),
+                releaseYear=assignJSONValue(movieData["releaseYear"], "num"),
                 metaScore=assignJSONValue(movieData["metaScore"], "num"),
                 overview=assignJSONValue(movieData["overview"], "str"),
                 runtime=assignJSONValue(getRuntime(movieData["runtime"]), "num"),
@@ -148,3 +149,24 @@ def rate(request):
 
     serializer = RateSerializer(Rate.objects.all(), many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+def watchlist(request):
+    data = request.data
+    print(type(data))
+    username = data["username"]
+    print("username:", username)
+    save_query = Save.objects.filter(username=username)
+
+    if len(save_query) == 0:
+        return Response("No saved movie found", status=status.HTTP_204_NO_CONTENT)
+
+    movieIdList = [save.movieId for save in save_query]
+
+    movieDataList = [
+        MovieSerializer(Movie.objects.get(pk=id)).data for id in movieIdList
+    ]
+    print(movieDataList)
+
+    return Response(movieDataList, status=status.HTTP_200_OK)

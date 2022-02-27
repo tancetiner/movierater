@@ -13,9 +13,9 @@ class Save(models.Model):
 
 class Movie(models.Model):
     name = models.CharField(max_length=40)
-    year = models.IntegerField()
+    releaseYear = models.IntegerField()
     director = models.CharField(max_length=40)
-    rating = models.FloatField()
+    imdbRating = models.FloatField()
     metaScore = models.IntegerField()
     overview = models.TextField()
     runtime = models.IntegerField()

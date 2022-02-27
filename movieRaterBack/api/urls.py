@@ -9,4 +9,5 @@ urlpatterns = [
     path("/movie", views.movies, name="movies"),
     path("/save", views.save, name="saves"),
     path("/rate", views.rate, name="ratings"),
+    path("/saved", views.watchlist, name="watchlist"),
 ]

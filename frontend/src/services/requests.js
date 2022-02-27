@@ -49,10 +49,18 @@ const rateRequest = (username, movieData, rate) => {
   return request;
 };
 
+const showSavedRequest = (username) => {
+  console.log("in the watchlist request");
+  const body = { username: username };
+  const request = axios.post("http://127.0.0.1:8000/api/saved", body);
+  return request;
+};
+
 export {
   loginRequest,
   registerRequest,
   saveRequest,
   randomMovieRequest,
   rateRequest,
+  showSavedRequest,
 };

@@ -76,13 +76,18 @@ const Home = () => {
       ) : (
         <button onClick={handleRateIt}> Rate it! </button>
       )}
-      <p>
+      {/* <p>
         {" "}
         {localStorage.getItem("userRates")
           ? localStorage.getItem("userRates")
           : ""}{" "}
       </p>
-      <p> {userRates} </p>
+      <p> {userRates} </p> */}
+
+      <br />
+      <br />
+
+      <button onClick={() => navigate("/saved")}> Show Watchlist </button>
     </div>
   );
 };
