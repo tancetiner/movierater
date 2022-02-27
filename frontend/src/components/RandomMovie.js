@@ -6,10 +6,6 @@ const RandomMovie = () => {
 
     const [moviedata, setMoviedata] = useState({});
 
-    // useEffect(() => {
-
-    // });
-
 
     const getMovie = () => {
         const request = randomMovieRequest();
