@@ -20,3 +20,9 @@ class Movie(models.Model):
     overview = models.TextField()
     runtime = models.IntegerField()
     genre = models.CharField(max_length=40)
+
+
+class Rate(models.Model):
+    username = models.CharField(max_length=40)
+    movieId = models.IntegerField()
+    rating = models.IntegerField()

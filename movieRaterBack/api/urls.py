@@ -8,4 +8,5 @@ urlpatterns = [
     path("/deleteUser", views.deleteUser, name="delete-user"),
     path("/movie", views.movies, name="movies"),
     path("/save", views.save, name="saves"),
+    path("/rate", views.rate, name="ratings"),
 ]

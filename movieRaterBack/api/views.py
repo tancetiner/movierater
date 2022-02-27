@@ -1,14 +1,31 @@
 from django.shortcuts import render
+from numpy import var
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import UserSerializer, MovieSerializer, SaveSerializer
-from .models import User, Movie, Save
+from .serializers import RateSerializer, UserSerializer, MovieSerializer, SaveSerializer
+from .models import User, Movie, Save, Rate
 from rest_framework import status
+import json
 
 
 @api_view(["GET"])
 def hello(request):
     return Response("Hello World!")
+
+
+def assignJSONValue(value, varType):
+    if value == "":
+        if varType == "str":
+            return "Not specified"
+        elif varType == "num":
+            return -1
+
+    return value
+
+
+def getRuntime(value):
+    idx = value.index(" ")
+    return value[:idx]
 
 
 @api_view(["GET", "POST"])
@@ -77,26 +94,57 @@ def save(request):
     if request.method == "POST":
         data = request.data
         print(data)
-        movieData = data["movie"]
+        print("Type of the input: ", type(data))
+        movieData = json.loads(data["movie"])
         username = data["username"]
-
-        # idx = str(movieData["runtime"]).index(" ")
+        print("Type of the moviedata:", type(movieData))
+        print("Moviedata:", movieData)
+        print("Type of the username:", type(username))
 
         if len(Movie.objects.filter(name=str(movieData["name"]))) == 0:
             Movie.objects.create(
-                name=movieData["name"],
-                director=movieData["director"],
-                rating=float(movieData["rating"]),
-                year=int(movieData["year"]),
-                metaScore=movieData["metascore"],
-                overview=movieData["overview"],
-                runtime=int(movieData["runtime"][:3]),
-                genre=movieData["genre"],
+                name=assignJSONValue(movieData["name"], "str"),
+                director=assignJSONValue(movieData["director"], "str"),
+                rating=assignJSONValue(movieData["imdbRating"], "num"),
+                year=assignJSONValue(movieData["releaseYear"], "num"),
+                metaScore=assignJSONValue(movieData["metaScore"], "num"),
+                overview=assignJSONValue(movieData["overview"], "str"),
+                runtime=assignJSONValue(getRuntime(movieData["runtime"], "num")),
+                genre=assignJSONValue(movieData["genre"], "str"),
             )
 
         movie = Movie.objects.get(name=movieData["name"])
         Save.objects.create(username=username, movieId=movie.id)
 
         return Response(
-            SaveSerializer(Save.objects.all()).data, status=status.HTTP_200_OK
+            SaveSerializer(Save.objects.all(), many=True).data,
+            status=status.HTTP_200_OK,
         )
+
+
+@api_view(["GET", "POST"])
+def rate(request):
+    if request.method == "POST":
+        data = request.data
+        print(data)
+        movieData = json.loads(data["movie"])
+        username = data["username"]
+        rating = int(data["rating"])
+
+        if len(Movie.objects.filter(name=str(movieData["name"]))) == 0:
+            Movie.objects.create(
+                name=assignJSONValue(movieData["name"], "str"),
+                director=assignJSONValue(movieData["director"], "str"),
+                rating=assignJSONValue(movieData["imdbRating"], "num"),
+                year=assignJSONValue(movieData["releaseYear"], "num"),
+                metaScore=assignJSONValue(movieData["metaScore"], "num"),
+                overview=assignJSONValue(movieData["overview"], "str"),
+                runtime=assignJSONValue(getRuntime(movieData["runtime"]), "num"),
+                genre=assignJSONValue(movieData["genre"], "str"),
+            )
+
+        movie = Movie.objects.get(name=movieData["name"])
+        Rate.objects.create(username=username, movieId=movie.id, rating=rating)
+
+    serializer = RateSerializer(Rate.objects.all(), many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
