@@ -196,3 +196,26 @@ def ratingList(request):
     print(movieDataList)
 
     return Response(movieDataList, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+def deleteFromWatchlist(request):
+    data = request.data
+    # movieData = json.loads(data["movie"])
+    movieData = data["movie"]
+    name = movieData["name"]
+    username = data["username"]
+
+    print(movieData)
+    print(username)
+
+    id = Movie.objects.get(name=name).pk
+
+    print("id:", id)
+
+    save = (Save.objects.filter(username=username).filter(movieId=id))[0]
+    print("save")
+    save.delete()
+    print("deleted")
+
+    return Response("Save deleted!", status=status.HTTP_200_OK)

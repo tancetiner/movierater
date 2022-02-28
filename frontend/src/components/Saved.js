@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { showSavedRequest } from "../services/requests";
+import { showSavedRequest, deleteMovieRequest } from "../services/requests";
 import MovieDetail from "./MovieDetail";
 import { useNavigate } from "react-router-dom";
 
@@ -11,22 +11,33 @@ const Saved = (props) => {
   let navigate = useNavigate();
 
   useEffect(() => {
+    loadMovies();
+  }, []);
+
+  const loadMovies = () => {
     const request = showSavedRequest(username);
     request
       .then((response) => {
-        setSuccess(true);
-        console.log(response.data);
         const list = [].concat(response.data);
-        console.log(response.data);
-        console.log(typeof response.data);
         setSaveList(list);
-        console.log(saveList);
       })
       .catch((err) => console.log(err));
-  }, []);
+  };
 
   const handleBack = () => {
     navigate("/home");
+  };
+
+  const handleDelete = (movie) => {
+    return () => {
+      const request = deleteMovieRequest(username, movie);
+      request
+        .then((response) => {
+          console.log(response.data);
+          loadMovies();
+        })
+        .catch((err) => console.log(err));
+    };
   };
 
   return (
@@ -37,6 +48,7 @@ const Saved = (props) => {
           <MovieDetail movie={movie} key={idx}>
             {" "}
           </MovieDetail>
+          <button onClick={handleDelete(movie)}> Delete from list </button>
           <br />
         </div>
       ))}

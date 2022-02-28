@@ -11,4 +11,5 @@ urlpatterns = [
     path("/rate", views.rate, name="ratings"),
     path("/saved", views.watchlist, name="watch-list"),
     path("/rated", views.ratingList, name="rating-list"),
+    path("/deleteMovie", views.deleteFromWatchlist, name="delete-from-watchlist"),
 ]

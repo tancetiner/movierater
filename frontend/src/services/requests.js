@@ -63,6 +63,16 @@ const showRatedRequest = (username) => {
   return request;
 };
 
+const deleteMovieRequest = (username, movieData) => {
+  console.log("in the delete movie request");
+  const body = {
+    username: username,
+    movie: movieData,
+  };
+  const request = axios.post("http://127.0.0.1:8000/api/deleteMovie", body);
+  return request;
+};
+
 export {
   loginRequest,
   registerRequest,
@@ -71,4 +81,5 @@ export {
   rateRequest,
   showSavedRequest,
   showRatedRequest,
+  deleteMovieRequest,
 };
