@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { changeRatingRequest, showRatedRequest } from "../services/requests";
 import MovieDetail from "./MovieDetail";
-import RateForm from "./RateForm";
 
 const Rated = () => {
   const [username] = useState(localStorage.getItem("username"));

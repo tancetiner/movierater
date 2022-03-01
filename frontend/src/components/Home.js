@@ -4,6 +4,19 @@ import { useEffect, useState } from "react";
 import RandomMovie from "./RandomMovie";
 import { saveRequest } from "../services/requests";
 import RateForm from "./RateForm";
+import {
+  Typography,
+  AppBar,
+  CssBaseline,
+  Container,
+  Paper,
+  Box,
+  Grid,
+  Button,
+  Toolbar,
+} from "@mui/material";
+import MovieCreationOutlinedIcon from "@mui/icons-material/MovieCreationOutlined";
+import TheatersOutlinedIcon from "@mui/icons-material/TheatersOutlined";
 
 const Home = () => {
   let navigate = useNavigate();
@@ -57,12 +70,43 @@ const Home = () => {
 
   return (
     <div>
-      <h1> Homepage </h1>
-      <h2>
-        {" "}
-        Welcome {persistentUserData ? userData.username : " "}{" "}
-        <button onClick={handleLogout}> Logout </button>{" "}
-      </h2>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <MovieCreationOutlinedIcon fontSize="large" color="secondary" />
+            <Typography variant="h4" color="black" align="left">
+              MovieRater
+            </Typography>
+            <TheatersOutlinedIcon fontSize="large" color="secondary" />
+            <Grid container justifyContent="right">
+              <Grid item>
+                <Button color="inherit" onClick={() => navigate("/saved")}>
+                  Watchlist
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button color="inherit" onClick={() => navigate("/rated")}>
+                  Ratings
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button color="inherit" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </Grid>
+            </Grid>
+          </Toolbar>
+        </AppBar>
+      </Box>
+
+      {persistentUserData ? (
+        <Typography variant="h5" textAlign="center" padding={2}>
+          {" "}
+          {userData.username}{" "}
+        </Typography>
+      ) : (
+        ""
+      )}
 
       <div>
         <RandomMovie> </RandomMovie>
@@ -76,19 +120,6 @@ const Home = () => {
       ) : (
         <button onClick={handleRateIt}> Rate it! </button>
       )}
-      {/* <p>
-        {" "}
-        {localStorage.getItem("userRates")
-          ? localStorage.getItem("userRates")
-          : ""}{" "}
-      </p>
-      <p> {userRates} </p> */}
-
-      <br />
-      <br />
-
-      <button onClick={() => navigate("/saved")}> Show Watchlist </button>
-      <button onClick={() => navigate("/rated")}> Show My Ratings </button>
     </div>
   );
 };

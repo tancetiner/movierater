@@ -224,7 +224,6 @@ def deleteFromWatchlist(request):
 @api_view(["POST"])
 def changeRating(request):
     data = request.data
-    # movieData = json.loads(data["movie"])
     movieData = data["movie"]
     movieName = movieData["name"]
     username = data["username"]
@@ -234,7 +233,6 @@ def changeRating(request):
 
     rate = (Rate.objects.filter(username=username).filter(movieId=id))[0]
     rate.rating = rating
-    # setattr(rate, 'rating', rating)
     rate.save()
 
     print("new rating is:", rate.rating)

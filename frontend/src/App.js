@@ -30,7 +30,7 @@ const App = () => {
         <div>
           <Box sx={{ bgColor: "background.paper" }}>
             <Typography variant="h5" align="center" padding={5}>
-              Welcome to the Movie Rater!
+              Get random movies, add them to watchlist or rate them!
             </Typography>
             <LoginForm> </LoginForm>
           </Box>
