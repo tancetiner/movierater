@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { rateRequest } from "../services/requests";
+import { rateRequest, changeRatingRequest } from "../services/requests";
 import { useNavigate } from "react-router-dom";
 
 const RateForm = (props) => {
@@ -38,8 +38,7 @@ const RateForm = (props) => {
         <select value={rating} onChange={handleChange}>
           {ratings.map((rate) => (
             <option value={`${rate}`} key={rate}>
-              {" "}
-              {rate}{" "}
+              {rate}
             </option>
           ))}
         </select>

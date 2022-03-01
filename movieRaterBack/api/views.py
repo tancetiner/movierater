@@ -219,3 +219,24 @@ def deleteFromWatchlist(request):
     print("deleted")
 
     return Response("Save deleted!", status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+def changeRating(request):
+    data = request.data
+    # movieData = json.loads(data["movie"])
+    movieData = data["movie"]
+    movieName = movieData["name"]
+    username = data["username"]
+    rating = int(data["rating"])
+
+    id = Movie.objects.get(name=movieName).pk
+
+    rate = (Rate.objects.filter(username=username).filter(movieId=id))[0]
+    rate.rating = rating
+    # setattr(rate, 'rating', rating)
+    rate.save()
+
+    print("new rating is:", rate.rating)
+
+    return Response("Rating changed!", status=status.HTTP_200_OK)
