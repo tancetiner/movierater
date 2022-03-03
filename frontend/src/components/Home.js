@@ -4,17 +4,7 @@ import { useEffect, useState } from "react";
 import RandomMovie from "./RandomMovie";
 import { saveRequest } from "../services/requests";
 import RateForm from "./RateForm";
-import {
-  Typography,
-  AppBar,
-  CssBaseline,
-  Container,
-  Paper,
-  Box,
-  Grid,
-  Button,
-  Toolbar,
-} from "@mui/material";
+import { Typography, AppBar, Box, Grid, Button, Toolbar } from "@mui/material";
 import MovieCreationOutlinedIcon from "@mui/icons-material/MovieCreationOutlined";
 import TheatersOutlinedIcon from "@mui/icons-material/TheatersOutlined";
 
@@ -23,8 +13,9 @@ const Home = () => {
 
   const persistentUserData = localStorage.getItem("user");
   const [userData] = useState(JSON.parse(persistentUserData));
-  const [userRates, setUserRates] = useState(false);
-  localStorage.setItem("userRates", false);
+  const [r, refresh] = useState(1);
+  // const [userRates, setUserRates] = useState(false);
+  // localStorage.setItem("userRates", false);
 
   useEffect(() => {
     if (persistentUserData) {
@@ -33,11 +24,6 @@ const Home = () => {
       navigate("/");
     }
   }, []);
-
-  useEffect(() => {
-    console.log(localStorage.getItem("userRates"));
-    setUserRates(localStorage.getItem("userRates"));
-  });
 
   const handleLogout = (event) => {
     localStorage.clear();
@@ -54,19 +40,20 @@ const Home = () => {
       request
         .then((response) => {
           console.log(response.data);
+          refresh(r + 1);
         })
         .catch((err) => console.log(err));
     }
   };
 
-  const handleRateIt = (event) => {
-    event.preventDefault();
-    if (localStorage.getItem("movie") === null) {
-      alert("You must press the Random Movie button first!");
-    } else {
-      localStorage.setItem("userRates", true);
-    }
-  };
+  // const handleRateIt = (event) => {
+  //   event.preventDefault();
+  //   if (localStorage.getItem("movie") === null) {
+  //     alert("You must press the Random Movie button first!");
+  //   } else {
+  //     localStorage.setItem("userRates", true);
+  //   }
+  // };
 
   return (
     <div>
@@ -109,17 +96,13 @@ const Home = () => {
       )}
 
       <div>
-        <RandomMovie> </RandomMovie>
+        <RandomMovie r={r}> </RandomMovie>
       </div>
       <br />
       <button onClick={handleSave}> Save to Watchlist </button>
       <br />
       <br />
-      {userRates ? (
-        <RateForm> </RateForm>
-      ) : (
-        <button onClick={handleRateIt}> Rate it! </button>
-      )}
+      <RateForm> </RateForm>
     </div>
   );
 };

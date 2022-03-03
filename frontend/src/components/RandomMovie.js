@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { randomMovieRequest } from "../services/requests";
 import MovieDetail from "./MovieDetail";
 
-const RandomMovie = () => {
+const RandomMovie = (props) => {
   const [moviedata, setMoviedata] = useState({});
+  const [refresh, setRefresh] = useState(props.r);
+
+  if (refresh) {
+  }
+
+  useEffect(() => {
+    getMovie();
+  }, [refresh]);
 
   const getMovie = () => {
     const request = randomMovieRequest();
@@ -19,7 +27,7 @@ const RandomMovie = () => {
       {Object.keys(moviedata).length !== 0 ? (
         <MovieDetail movie={moviedata} />
       ) : (
-        <p> Press the button for a random movie! </p>
+        <p> Wait for movie to load... </p>
       )}
       <button onClick={getMovie}> Random Movie! </button>
     </div>
