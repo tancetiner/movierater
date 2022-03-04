@@ -14,8 +14,6 @@ const Home = () => {
   const persistentUserData = localStorage.getItem("user");
   const [userData] = useState(JSON.parse(persistentUserData));
   const [r, refresh] = useState(1);
-  // const [userRates, setUserRates] = useState(false);
-  // localStorage.setItem("userRates", false);
 
   useEffect(() => {
     if (persistentUserData) {
@@ -31,7 +29,6 @@ const Home = () => {
   };
 
   const handleSave = (event) => {
-    event.preventDefault();
     const movieData = localStorage.getItem("movie");
     if (movieData === null) {
       alert("You must press the Random Movie button first!");
@@ -40,7 +37,7 @@ const Home = () => {
       request
         .then((response) => {
           console.log(response.data);
-          refresh(r + 1);
+          refresh((r) => r + 1);
         })
         .catch((err) => console.log(err));
     }
