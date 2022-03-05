@@ -8,7 +8,7 @@ import TodayRoundedIcon from "@mui/icons-material/TodayRounded";
 import MovieOutlinedIcon from "@mui/icons-material/MovieOutlined";
 import { Button, CardActions } from "@mui/material";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, isRated }) => {
   return (
     <Card
       sx={{
@@ -58,10 +58,25 @@ const MovieCard = ({ movie }) => {
             </Grid>
             <Grid item>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                {movie.imdbRating}
+                Imdb Rating: {movie.imdbRating}
               </Typography>
             </Grid>
           </Grid>
+
+          {isRated ? (
+            <Grid container spacing={2} justifyContent="center">
+              <Grid item>
+                <StarOutlineIcon />
+              </Grid>
+              <Grid item>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  Your Rating: {movie.userRating}
+                </Typography>
+              </Grid>
+            </Grid>
+          ) : (
+            <></>
+          )}
         </Grid>
       </CardContent>
     </Card>

@@ -43,15 +43,6 @@ const Home = () => {
     }
   };
 
-  // const handleRateIt = (event) => {
-  //   event.preventDefault();
-  //   if (localStorage.getItem("movie") === null) {
-  //     alert("You must press the Random Movie button first!");
-  //   } else {
-  //     localStorage.setItem("userRates", true);
-  //   }
-  // };
-
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { showSavedRequest, deleteMovieRequest } from "../services/requests";
-// import MovieDetail from "./MovieDetail";
 import { useNavigate } from "react-router-dom";
-import MovieCard from "./BasicCard";
+import MovieCard from "./MovieCard";
 import { Button, Grid } from "@mui/material";
 
 const Saved = (props) => {
@@ -44,12 +43,11 @@ const Saved = (props) => {
 
   return (
     <div>
-      <button onClick={handleBack}> Back </button>
+      <Button onClick={handleBack} variant="contained">
+        Back
+      </Button>
       {saveList.map((movie, idx) => (
         <div key={idx}>
-          {/* <MovieDetail movie={movie} key={idx}>
-            {" "}
-          </MovieDetail> */}
           <MovieCard movie={movie} key={idx} />
           <Grid container justifyContent="center">
             <Button

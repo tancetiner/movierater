@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { randomMovieRequest } from "../services/requests";
 import { Button, Grid } from "@mui/material";
 import MovieDetail from "./MovieDetail";
-import MovieCard from "./BasicCard";
+import MovieCard from "./MovieCard";
 
 const RandomMovie = (props) => {
   const [moviedata, setMoviedata] = useState({});

@@ -2,7 +2,17 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { changeRatingRequest, showRatedRequest } from "../services/requests";
+import MovieCard from "./MovieCard";
 import MovieDetail from "./MovieDetail";
+import {
+  Button,
+  Select,
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Grid,
+} from "@mui/material";
 
 const Rated = () => {
   const [username] = useState(localStorage.getItem("username"));
@@ -49,26 +59,50 @@ const Rated = () => {
 
   return (
     <div>
-      <button onClick={handleBack}> Back </button>
+      <Button onClick={handleBack} variant="contained">
+        {" "}
+        Back{" "}
+      </Button>
       {rateList.map((movie, idx) => (
         <div key={idx}>
-          <MovieDetail movie={movie} key={idx} isRated={true}>
-            {" "}
-          </MovieDetail>
-          <div>
-            <form onSubmit={handleRate(movie)}>
-              <select value={rating} onChange={handleChange}>
-                {ratings.map((rate) => (
-                  <option value={`${rate}`} key={rate}>
+          <MovieCard movie={movie} isRated />
+          <Grid container justifyContent="center" direction="row">
+            <Box sx={{ minWidth: 100 }}>
+              <Grid item>
+                <FormControl
+                  size="small"
+                  variant="standard"
+                  sx={{ color: "text.primary" }}
+                >
+                  <InputLabel id="demo-simple-select-label">
                     {" "}
-                    {rate}{" "}
-                  </option>
-                ))}
-              </select>
-              <input type="submit" value="Rate!" />
-            </form>
-          </div>
-          <br />
+                    Rating{" "}
+                  </InputLabel>
+
+                  <Select
+                    sx={{ color: "text.primary" }}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="1"
+                    value={rating}
+                    onChange={handleChange}
+                  >
+                    {ratings.map((rate) => (
+                      <MenuItem value={rate} key={rate} color="inherit">
+                        {rate}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Box>
+            <Grid item>
+              <Button onClick={handleRate(movie)} color="inherit">
+                {" "}
+                Rate{" "}
+              </Button>
+            </Grid>
+          </Grid>
         </div>
       ))}
     </div>

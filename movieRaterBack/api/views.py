@@ -147,7 +147,7 @@ def rate(request):
 
         else:
             id = Movie.objects.get(name=movieData["name"]).pk
-            if len(Rate.objects.filter(username=username).filter(movieId=id) != 0):
+            if len(Rate.objects.filter(username=username).filter(movieId=id)) != 0:
                 rate = Rate.objects.filter(username=username).filter(movieId=id)[0]
                 rate.rating = rating
                 rate.save()
