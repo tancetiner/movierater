@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { showSavedRequest, deleteMovieRequest } from "../services/requests";
-import MovieDetail from "./MovieDetail";
+// import MovieDetail from "./MovieDetail";
 import { useNavigate } from "react-router-dom";
+import MovieCard from "./BasicCard";
+import { Button, Grid } from "@mui/material";
 
 const Saved = (props) => {
   const [username] = useState(localStorage.getItem("username"));
@@ -45,10 +47,20 @@ const Saved = (props) => {
       <button onClick={handleBack}> Back </button>
       {saveList.map((movie, idx) => (
         <div key={idx}>
-          <MovieDetail movie={movie} key={idx}>
+          {/* <MovieDetail movie={movie} key={idx}>
             {" "}
-          </MovieDetail>
-          <button onClick={handleDelete(movie)}> Delete from list </button>
+          </MovieDetail> */}
+          <MovieCard movie={movie} key={idx} />
+          <Grid container justifyContent="center">
+            <Button
+              onClick={handleDelete(movie)}
+              variant="outlined"
+              color="inherit"
+            >
+              {" "}
+              Delete from list{" "}
+            </Button>
+          </Grid>
           <br />
         </div>
       ))}
