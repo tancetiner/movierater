@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { randomMovieRequest } from "../services/requests";
+import { Button, Grid } from "@mui/material";
 import MovieDetail from "./MovieDetail";
+import MovieCard from "./BasicCard";
 
 const RandomMovie = (props) => {
   const [moviedata, setMoviedata] = useState({});
@@ -25,11 +27,20 @@ const RandomMovie = (props) => {
   return (
     <div>
       {Object.keys(moviedata).length !== 0 ? (
-        <MovieDetail movie={moviedata} />
+        <Grid container direction="column">
+          <MovieCard movie={moviedata} />
+          <Button
+            onClick={getMovie}
+            color="inherit"
+            sx={{ width: 1 / 3, alignSelf: "center" }}
+          >
+            {" "}
+            Random Movie!{" "}
+          </Button>
+        </Grid>
       ) : (
         <p> Wait for movie to load... </p>
       )}
-      <button onClick={getMovie}> Random Movie! </button>
     </div>
   );
 };

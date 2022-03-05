@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import { rateRequest, changeRatingRequest } from "../services/requests";
 import { useNavigate } from "react-router-dom";
+import {
+  Box,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  SelectChangeEvent,
+  Button,
+} from "@mui/material";
 
 const RateForm = (props) => {
-  const [rating, setRating] = useState("1");
+  const [rating, setRating] = useState("");
 
   let navigate = useNavigate();
 
@@ -33,18 +42,46 @@ const RateForm = (props) => {
   const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
-    <div>
-      <form onSubmit={handleRate}>
-        <select value={rating} onChange={handleChange}>
+    // <div>
+    //   <form onSubmit={handleRate}>
+    //     <select value={rating} onChange={handleChange}>
+    //       {ratings.map((rate) => (
+    //         <option value={`${rate}`} key={rate}>
+    //           {rate}
+    //         </option>
+    //       ))}
+    //     </select>
+    //     <input type="submit" value="Rate!" />
+    //   </form>
+    // </div>
+
+    <Box sx={{ minWidth: 100 }}>
+      <FormControl
+        size="small"
+        variant="standard"
+        sx={{ color: "text.primary" }}
+      >
+        <InputLabel id="demo-simple-select-label"> Rating </InputLabel>
+        <Select
+          sx={{ color: "text.primary" }}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          label="1"
+          value={rating}
+          onChange={handleChange}
+        >
           {ratings.map((rate) => (
-            <option value={`${rate}`} key={rate}>
+            <MenuItem value={rate} key={rate} color="inherit">
               {rate}
-            </option>
+            </MenuItem>
           ))}
-        </select>
-        <input type="submit" value="Rate!" />
-      </form>
-    </div>
+        </Select>
+        <Button onClick={handleRate} color="inherit">
+          {" "}
+          Rate{" "}
+        </Button>
+      </FormControl>
+    </Box>
   );
 };
 

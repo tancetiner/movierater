@@ -96,10 +96,12 @@ const Home = () => {
         <RandomMovie r={r}> </RandomMovie>
       </div>
       <br />
-      <button onClick={handleSave}> Save to Watchlist </button>
-      <br />
-      <br />
-      <RateForm> </RateForm>
+      <Grid container justifyContent="space-evenly">
+        <Button onClick={handleSave} color="inherit">
+          Save to Watchlist
+        </Button>
+        <RateForm> </RateForm>
+      </Grid>
     </div>
   );
 };

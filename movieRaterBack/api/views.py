@@ -145,6 +145,15 @@ def rate(request):
                 genre=assignJSONValue(movieData["genre"], "str"),
             )
 
+        else:
+            id = Movie.objects.get(name=movieData["name"]).pk
+            if len(Rate.objects.filter(username=username).filter(movieId=id) != 0):
+                rate = Rate.objects.filter(username=username).filter(movieId=id)[0]
+                rate.rating = rating
+                rate.save()
+                serializer = RateSerializer(Rate.objects.all(), many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
         movie = Movie.objects.get(name=movieData["name"])
         Rate.objects.create(username=username, movieId=movie.id, rating=rating)
 
@@ -189,7 +198,7 @@ def ratingList(request):
     for id in movieIdList:
         movie = Movie.objects.get(pk=id)
         movieData = MovieSerializer(movie).data
-        movieData["userRating"] = Rate.objects.get(movieId=id).rating
+        movieData["userRating"] = Rate.objects.filter(movieId=id)[0].rating
 
         movieDataList.append(movieData)
 
