@@ -35,7 +35,7 @@ const MovieCard = ({ movie, isRated }) => {
               <MovieOutlinedIcon />
             </Grid>
             <Grid item>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              <Typography variant="h6" sx={{ mb: 1.5 }} color="text.secondary">
                 {movie.director}
               </Typography>
             </Grid>
@@ -46,7 +46,7 @@ const MovieCard = ({ movie, isRated }) => {
               <TodayRoundedIcon />
             </Grid>
             <Grid item>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              <Typography variant="h6" sx={{ mb: 1.5 }} color="text.secondary">
                 {movie.releaseYear}
               </Typography>
             </Grid>
@@ -57,9 +57,23 @@ const MovieCard = ({ movie, isRated }) => {
               <StarOutlineIcon />
             </Grid>
             <Grid item>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Imdb Rating: {movie.imdbRating}
-              </Typography>
+              {isRated ? (
+                <Typography
+                  variant="h6"
+                  sx={{ mb: 1.5 }}
+                  color="text.secondary"
+                >
+                  Imdb Rating: {movie.imdbRating}
+                </Typography>
+              ) : (
+                <Typography
+                  variant="h6"
+                  sx={{ mb: 1.5 }}
+                  color="text.secondary"
+                >
+                  {movie.imdbRating}
+                </Typography>
+              )}
             </Grid>
           </Grid>
 
@@ -69,7 +83,11 @@ const MovieCard = ({ movie, isRated }) => {
                 <StarOutlineIcon />
               </Grid>
               <Grid item>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                <Typography
+                  variant="h6"
+                  sx={{ mb: 1.5 }}
+                  color="text.secondary"
+                >
                   Your Rating: {movie.userRating}
                 </Typography>
               </Grid>

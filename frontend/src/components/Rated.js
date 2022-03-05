@@ -66,7 +66,7 @@ const Rated = () => {
       {rateList.map((movie, idx) => (
         <div key={idx}>
           <MovieCard movie={movie} isRated />
-          <Grid container justifyContent="center" direction="row">
+          <Grid container justifyContent="center" direction="row" padding={2}>
             <Box sx={{ minWidth: 100 }}>
               <Grid item>
                 <FormControl

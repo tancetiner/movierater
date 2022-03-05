@@ -61,9 +61,12 @@ const RateForm = (props) => {
         variant="standard"
         sx={{ color: "text.primary" }}
       >
-        <InputLabel id="demo-simple-select-label"> Rating </InputLabel>
+        <InputLabel id="demo-simple-select-label" sx={{ fontSize: 14 }}>
+          {" "}
+          Rating{" "}
+        </InputLabel>
         <Select
-          sx={{ color: "text.primary" }}
+          sx={{ color: "text.primary", fontSize: 20 }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="1"
@@ -76,7 +79,12 @@ const RateForm = (props) => {
             </MenuItem>
           ))}
         </Select>
-        <Button onClick={handleRate} color="inherit">
+        <Button
+          onClick={handleRate}
+          color="inherit"
+          variant="outlined"
+          padding={2}
+        >
           {" "}
           Rate{" "}
         </Button>

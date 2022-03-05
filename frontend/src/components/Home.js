@@ -75,7 +75,7 @@ const Home = () => {
       </Box>
 
       {persistentUserData ? (
-        <Typography variant="h5" textAlign="center" padding={2}>
+        <Typography variant="h6" textAlign="right" padding={1 / 2}>
           {" "}
           {userData.username}{" "}
         </Typography>
@@ -83,12 +83,12 @@ const Home = () => {
         ""
       )}
 
-      <div>
+      <Box sx={{ padding: 5, width: 1100, margin: "auto", marginTop: "flex" }}>
         <RandomMovie r={r}> </RandomMovie>
-      </div>
+      </Box>
       <br />
       <Grid container justifyContent="space-evenly">
-        <Button onClick={handleSave} color="inherit">
+        <Button onClick={handleSave} color="inherit" variant="outlined">
           Save to Watchlist
         </Button>
         <RateForm> </RateForm>
