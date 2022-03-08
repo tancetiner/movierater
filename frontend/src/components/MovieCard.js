@@ -14,7 +14,7 @@ const MovieCard = ({ movie, isRated }) => {
       sx={{
         width: 1 / 3,
         minHeight: 2 / 3,
-        bgcolor: "secondary.main",
+        bgcolor: "rgb(223, 178, 41)",
         padding: 2,
         margin: "auto",
       }}

@@ -3,7 +3,7 @@ body {
   font-family: "Lucida Console", "Courier New", monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(100, 105, 128);
+  background-color: rgb(217, 222, 222)
 }
 
 code {

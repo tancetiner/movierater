@@ -20,16 +20,20 @@ const App = () => {
   return (
     <div>
       <CssBaseline />
-      <AppBar position="relative" color="primary">
-        <Typography variant="h2" color="textPrimary" align="center">
+      <AppBar
+        style={{ background: "#9283de" }}
+        position="static"
+        sx={{ color: "#4442bd" }}
+      >
+        <Typography variant="h2" color="inherit" align="center">
           {" "}
           Movie Rater
         </Typography>
       </AppBar>
       <main>
         <div>
-          <Box sx={{ bgColor: "background.paper" }}>
-            <Typography variant="h5" align="center" padding={5}>
+          <Box sx={{ bgColor: "rgb(217, 222, 222)" }}>
+            <Typography variant="h5" align="center" padding={5} color="inherit">
               Get random movies, add them to watchlist or rate them!
             </Typography>
             <LoginForm> </LoginForm>

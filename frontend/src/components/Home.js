@@ -46,13 +46,23 @@ const Home = () => {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar
+          style={{ background: "#9283de" }}
+          position="static"
+          sx={{ color: "#4442bd" }}
+        >
           <Toolbar>
-            <MovieCreationOutlinedIcon fontSize="large" color="secondary" />
+            <MovieCreationOutlinedIcon
+              fontSize="large"
+              style={{ color: "#4442bd" }}
+            />
             <Typography variant="h4" color="black" align="left">
               MovieRater
             </Typography>
-            <TheatersOutlinedIcon fontSize="large" color="secondary" />
+            <TheatersOutlinedIcon
+              fontSize="large"
+              style={{ color: "#4442bd" }}
+            />
             <Grid container justifyContent="right">
               <Grid item>
                 <Button color="inherit" onClick={() => navigate("/saved")}>
@@ -75,9 +85,13 @@ const Home = () => {
       </Box>
 
       {persistentUserData ? (
-        <Typography variant="h6" textAlign="right" padding={1 / 2}>
-          {" "}
-          {userData.username}{" "}
+        <Typography
+          variant="h6"
+          textAlign="right"
+          color={"4442bd"}
+          style={{ margin: 15 }}
+        >
+          {userData.username}
         </Typography>
       ) : (
         ""
@@ -88,7 +102,16 @@ const Home = () => {
       </Box>
       <br />
       <Grid container justifyContent="space-evenly">
-        <Button onClick={handleSave} color="inherit" variant="outlined">
+        <Button
+          onClick={handleSave}
+          // sx={{ backgroundColor: "4442bd" }}
+          style={{
+            borderRadius: 10,
+            backgroundColor: "#4442bd",
+          }}
+          // style={{ color: "#black", backgroundColor: "4442bd" }}
+          variant="contained"
+        >
           Save to Watchlist
         </Button>
         <RateForm> </RateForm>

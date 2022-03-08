@@ -18,7 +18,6 @@ const LoginForm = (props) => {
   // const [password, setPassword] = useState("");
 
   let navigate = useNavigate();
-  const theme = createTheme();
 
   useEffect(() => {
     let loggedInUser = localStorage.getItem("user");
@@ -45,107 +44,68 @@ const LoginForm = (props) => {
   };
 
   return (
-    // <div>
-    //   <form onSubmit={handleSubmit} className="loginForm">
-    //     <div>
-    //       <Grid container spacing={2} justify="center">
-    //         <Grid item>Username:</Grid>
-    //         <Grid item>
-    //           <input
-    //             type="text"
-    //             value={username}
-    //             onChange={({ target }) => setUsername(target.value)}
-    //           />
-    //         </Grid>
-    //       </Grid>
-    //     </div>
-
-    //     <div>
-    //       <Grid container spacing={2} justify="center">
-    //         <Grid item>Password:</Grid>
-    //         <Grid item>
-    //           <input
-    //             type="text"
-    //             value={password}
-    //             onChange={({ target }) => setPassword(target.value)}
-    //           />
-    //         </Grid>
-    //       </Grid>
-    //     </div>
-    //     <input type="submit" />
-    //   </form>
-    //   <nav
-    //     style={{
-    //       borderBottom: "solid 1px",
-    //       paddingBottom: "1rem",
-    //     }}
-    //   >
-    //     <Link to="/register"> Register as a new user </Link>
-    //   </nav>
-    // </div>
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          margin: "auto",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: 400,
+          height: 400,
+          borderRadius: 20,
+          padding: 4,
+        }}
+        style={{ backgroundColor: "rgb(223, 178, 41)" }}
+      >
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2, backgroundColor: "#4442bd" }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Button
-              variant="outlined"
-              align="center"
-              onClick={() => navigate("/register")}
-              fullWidth
-            >
-              Register as a new user{" "}
-            </Button>
-            {/* <Link to="/register"> Register as a new user </Link> */}
-            <Grid container>
-              <Grid item xs></Grid>
-              <Grid item></Grid>
-            </Grid>
-          </Box>
+            Sign In
+          </Button>
+          <Button
+            variant="contained"
+            align="center"
+            onClick={() => navigate("/register")}
+            sx={{ backgroundColor: "#4442bd" }}
+            fullWidth
+          >
+            Register as a new user{" "}
+          </Button>
+          {/* <Link to="/register"> Register as a new user </Link> */}
+          <Grid container>
+            <Grid item xs></Grid>
+            <Grid item></Grid>
+          </Grid>
         </Box>
-      </Container>
-    </ThemeProvider>
+      </Box>
+    </Container>
   );
 };
 

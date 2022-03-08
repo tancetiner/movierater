@@ -31,7 +31,12 @@ const RandomMovie = (props) => {
           <MovieCard movie={moviedata} />
           <Button
             onClick={getMovie}
-            color="inherit"
+            style={{
+              borderRadius: 10,
+              backgroundColor: "#4442bd",
+              margin: 8,
+            }}
+            variant="contained"
             sx={{ width: 1 / 3, alignSelf: "center" }}
           >
             {" "}

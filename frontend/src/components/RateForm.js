@@ -42,31 +42,10 @@ const RateForm = (props) => {
   const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
-    // <div>
-    //   <form onSubmit={handleRate}>
-    //     <select value={rating} onChange={handleChange}>
-    //       {ratings.map((rate) => (
-    //         <option value={`${rate}`} key={rate}>
-    //           {rate}
-    //         </option>
-    //       ))}
-    //     </select>
-    //     <input type="submit" value="Rate!" />
-    //   </form>
-    // </div>
-
     <Box sx={{ minWidth: 100 }}>
-      <FormControl
-        size="small"
-        variant="standard"
-        sx={{ color: "text.primary" }}
-      >
-        <InputLabel id="demo-simple-select-label" sx={{ fontSize: 14 }}>
-          {" "}
-          Rating{" "}
-        </InputLabel>
+      <FormControl size="small" variant="standard">
+        <InputLabel sx={{ fontSize: 14 }}> Rating </InputLabel>
         <Select
-          sx={{ color: "text.primary", fontSize: 20 }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="1"
@@ -81,12 +60,15 @@ const RateForm = (props) => {
         </Select>
         <Button
           onClick={handleRate}
-          color="inherit"
-          variant="outlined"
+          variant="contained"
           padding={2}
+          style={{
+            borderRadius: 10,
+            backgroundColor: "#4442bd",
+            margin: "4px",
+          }}
         >
-          {" "}
-          Rate{" "}
+          Rate
         </Button>
       </FormControl>
     </Box>
