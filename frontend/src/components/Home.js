@@ -104,12 +104,10 @@ const Home = () => {
       <Grid container justifyContent="space-evenly">
         <Button
           onClick={handleSave}
-          // sx={{ backgroundColor: "4442bd" }}
           style={{
             borderRadius: 10,
             backgroundColor: "#4442bd",
           }}
-          // style={{ color: "#black", backgroundColor: "4442bd" }}
           variant="contained"
         >
           Save to Watchlist

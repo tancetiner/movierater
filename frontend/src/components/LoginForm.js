@@ -32,8 +32,6 @@ const LoginForm = (props) => {
     const user = data.get("username");
     const pass = data.get("password");
     const request = loginRequest(user, pass);
-    // setUsername("");
-    // setPassword("");
     request
       .then((response) => {
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -60,7 +58,7 @@ const LoginForm = (props) => {
         style={{ backgroundColor: "rgb(223, 178, 41)" }}
       >
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign In
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -90,13 +88,12 @@ const LoginForm = (props) => {
             Sign In
           </Button>
           <Button
-            variant="contained"
             align="center"
             onClick={() => navigate("/register")}
-            sx={{ backgroundColor: "#4442bd" }}
+            sx={{ color: "#4442bd" }}
             fullWidth
           >
-            Register as a new user{" "}
+            Register as a new user
           </Button>
           {/* <Link to="/register"> Register as a new user </Link> */}
           <Grid container>

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { showSavedRequest, deleteMovieRequest } from "../services/requests";
 import { useNavigate } from "react-router-dom";
 import MovieCard from "./MovieCard";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Fab } from "@mui/material";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const Saved = (props) => {
   const [username] = useState(localStorage.getItem("username"));
@@ -43,17 +44,22 @@ const Saved = (props) => {
 
   return (
     <div>
-      <Button onClick={handleBack} variant="contained">
-        Back
-      </Button>
+      <Fab
+        sx={{ backgroundColor: "#4442bd", margin: 1 }}
+        color="inherit"
+        onClick={handleBack}
+        aria-label="back"
+      >
+        <ArrowBackIosNewIcon />
+      </Fab>
       {saveList.map((movie, idx) => (
         <div key={idx}>
           <MovieCard movie={movie} key={idx} />
           <Grid container justifyContent="center">
             <Button
               onClick={handleDelete(movie)}
-              variant="outlined"
-              color="inherit"
+              variant="contained"
+              sx={{ backgroundColor: "#4442bd", margin: 1 }}
             >
               {" "}
               Delete from list{" "}

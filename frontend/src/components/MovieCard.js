@@ -15,8 +15,9 @@ const MovieCard = ({ movie, isRated }) => {
         width: 1 / 3,
         minHeight: 2 / 3,
         bgcolor: "rgb(223, 178, 41)",
-        padding: 2,
+        padding: 1,
         margin: "auto",
+        borderRadius: 16,
       }}
     >
       <CardContent>

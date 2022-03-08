@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { changeRatingRequest, showRatedRequest } from "../services/requests";
 import MovieCard from "./MovieCard";
-import MovieDetail from "./MovieDetail";
 import {
   Button,
   Select,
@@ -12,7 +11,9 @@ import {
   InputLabel,
   MenuItem,
   Grid,
+  Fab,
 } from "@mui/material";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const Rated = () => {
   const [username] = useState(localStorage.getItem("username"));
@@ -59,25 +60,22 @@ const Rated = () => {
 
   return (
     <div>
-      <Button onClick={handleBack} variant="contained">
-        {" "}
-        Back{" "}
-      </Button>
+      <Fab
+        sx={{ backgroundColor: "#4442bd", margin: 1 }}
+        color="inherit"
+        onClick={handleBack}
+        aria-label="back"
+      >
+        <ArrowBackIosNewIcon />
+      </Fab>
       {rateList.map((movie, idx) => (
         <div key={idx}>
           <MovieCard movie={movie} isRated />
           <Grid container justifyContent="center" direction="row" padding={2}>
             <Box sx={{ minWidth: 100 }}>
               <Grid item>
-                <FormControl
-                  size="small"
-                  variant="standard"
-                  sx={{ color: "text.primary" }}
-                >
-                  <InputLabel id="demo-simple-select-label">
-                    {" "}
-                    Rating{" "}
-                  </InputLabel>
+                <FormControl size="small" variant="standard">
+                  <InputLabel sx={{ fontSize: 14 }}>Rating</InputLabel>
 
                   <Select
                     sx={{ color: "text.primary" }}
@@ -97,9 +95,17 @@ const Rated = () => {
               </Grid>
             </Box>
             <Grid item>
-              <Button onClick={handleRate(movie)} color="inherit">
-                {" "}
-                Rate{" "}
+              <Button
+                onClick={handleRate(movie)}
+                variant="contained"
+                padding={2}
+                style={{
+                  borderRadius: 10,
+                  backgroundColor: "#4442bd",
+                  margin: "4px",
+                }}
+              >
+                Rate
               </Button>
             </Grid>
           </Grid>
